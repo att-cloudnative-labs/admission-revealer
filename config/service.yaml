@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: admission-revealer
+  name: admission-revealer
+spec:
+  ports:
+    - port: 443
+      targetPort: 8443
+  type: ClusterIP
+  selector:
+    app: admission-revealer

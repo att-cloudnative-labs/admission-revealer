@@ -1,0 +1,23 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: admission-revealer
+webhooks:
+  - name: webhook.admission-revealer.atteg.com
+    failurePolicy: Ignore
+    clientConfig:
+      caBundle: Cg==
+      service:
+        name: admission-revealer
+        namespace: admission-revealer
+        path: /webhook
+        port: 443
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+        resources:
+          - secrets

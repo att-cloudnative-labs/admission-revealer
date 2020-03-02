@@ -1,0 +1,20 @@
+apiVersion: kcertifier.atteg.com/v1alpha1
+kind: Kcertifier
+metadata:
+  namespace: admission-revealer
+  name: webhhook-kcertifier
+spec:
+  keyLength: 2048
+  subject:
+    commonName: "webhook.admission-revealer.atteg.com"
+    country: "US"
+    stateOrProvince: "CA"
+    locality: "Los Angeles"
+    organization: "Admission Revealer"
+    organizationalUnit: "Webhook"
+  packages:
+    - type: "pem"
+      secretName: "tls"
+      options:
+        certDataKey: "cert.pem"
+        keyDataKey: "key.pem"

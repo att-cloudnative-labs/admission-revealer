@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: admission-revealer
+  name: admission-revealer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admission-revealer
+  template:
+    metadata:
+      labels:
+        app: admission-revealer
+    spec:
+      containers:
+        - name: admission-revealer
+          image: admission-revealer:v4
+          ports:
+            - containerPort: 8443
+              protocol: TCP
+          volumeMounts:
+            - name: tls
+              mountPath: /etc/certs
+      volumes:
+        - name: tls
+          secret:
+            secretName: tls
